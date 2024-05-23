@@ -1,3 +1,19 @@
+/*
+O tema do projeto escolhido pelo grupo é um sistema de concessionária que, apesar de nosso contexto ser uma elaboração
+simples do que poderia ser um sistema real, foi escolhido por estar alinhado com os objetivos do trabalho e ser facilmente
+compreendido pela maioria das pessoas. O principal objetivo do projeto é desenvolver um sistema CRUD (Create, Read, Update, Delete)
+utilizando a linguagem Java. Para alcançar esse objetivo, decidimos utilizar os ambientes de desenvolvimento Visual Studio Code
+e IntelliJ IDEA.
+
+O Cliente, o Funcionário e o Veículo são as entidades do nosso projeto, sendo que em suas classes temos os getters e setters
+para manipular os dados. Pessoa é a Super Classe de Cliente e Funcionário.
+
+Os Controladores são as classes que possuem os métodos relacionados à sua entidade, por exemplo o ControleCliente é o controlador
+da entidade cliente e nela teremos os métodos de cadastro, exibir, atualizar e deletar.
+
+O Menu exibe o menu de opções ao usuário.
+*/
+
 import Entidades.Cliente;
 import Entidades.Funcionario;
 import Entidades.Veiculo;
@@ -5,6 +21,10 @@ import Entidades.Veiculo;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/*
+Esta classe Principal contém a função main(), que é o ponto de entrada do programa. Nela inicializamos o que será nosso banco de dados,
+representado por um ArrayList<>, instanciamos as entidades iniciais conforme os requisitos do trabalho e instanciamos o menu.
+ */
 public class Principal {
     private static Scanner entrada = new Scanner(System.in);
     private static ArrayList<Veiculo> listaVeiculos;
@@ -48,6 +68,7 @@ public class Principal {
         listaVeiculos.add(veiculo06);
         listaVeiculos.add(veiculo07);
 
+        //Crio um objeto Menu para acessar o Menu de opções
         Menu menu = new Menu(entrada, listaClientes, listaFuncionarios, listaVeiculos);
         menu.exibirMenu();
     }

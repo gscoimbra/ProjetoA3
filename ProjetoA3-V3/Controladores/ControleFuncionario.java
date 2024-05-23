@@ -14,13 +14,14 @@ public class ControleFuncionario {
         this.listaFuncionarios = listaFuncionarios;
     }
 
-    // CADASTRO DO FUNCIONÁRIO
+    // CADASTRO DO FUNCIONÁRIO: Basicamente peço ao usuário os atributos do funcionário e crio um objeto funcionário com as informações, depois adiciono à lista
     public void cadastrarFuncionario() {
         entrada.nextLine(); // Limpar buffer
         System.out.print("Nome do funcionário: ");
         String nome = entrada.nextLine();
 
         int idade;
+        //Tratativa de erro
         while (true) {
             System.out.print("Idade do funcionário: ");
             if (entrada.hasNextInt()) {
@@ -43,16 +44,17 @@ public class ControleFuncionario {
         String endereco = entrada.nextLine();
 
         double salario;
-            while (true) {
-                System.out.print("Salário do funcionário: ");
-                if (entrada.hasNextInt() || entrada.hasNextDouble()) {
-                    salario = entrada.nextDouble();
-                    break; // sai do loop se a entrada for válida
-                } else {
-                    System.out.println("Entrada inválida. Por favor, digite um número.");
-                    entrada.nextLine(); // consome a entrada inválida
-                }
+        //Tratativa de erro
+        while (true) {
+            System.out.print("Salário do funcionário: ");
+            if (entrada.hasNextInt() || entrada.hasNextDouble()) {
+                salario = entrada.nextDouble();
+                break; // sai do loop se a entrada for válida
+            } else {
+                System.out.println("Entrada inválida. Por favor, digite um número.");
+                entrada.nextLine(); // consome a entrada inválida
             }
+        }
 
         entrada.nextLine(); // Limpar buffer
         System.out.print("Cargo do funcionário: ");
@@ -64,7 +66,7 @@ public class ControleFuncionario {
         System.out.println(funcionario.getNome() + " foi cadastrado com sucesso!");
     }
 
-    // EXIBIR 3 ATRIBUTOS DE TODOS OS FUNCIONÁRIOS OU TODOS DE UM FUNCIONÁRIO ESPECÍFICO
+    //EXIBIR FUNCIONÁRIO: Exibo 3 atributos dos funcionários e/ou todos de um funcionário específico
     public void exibirFuncionarios() {
         if (listaFuncionarios.isEmpty()) {
             System.out.println("Nenhum funcionário cadastrado.");
@@ -77,8 +79,19 @@ public class ControleFuncionario {
         System.out.print("Deseja exibir todos os atributos de um funcionário específico?(S/N): ");
         String resposta = entrada.next();
         if (resposta.equalsIgnoreCase("S")) {
-            System.out.print("Digite o ID do funcionário: ");
-            int idFuncionario = entrada.nextInt();
+
+            int idFuncionario;
+            //Tratativa de erro
+            while (true) {
+                System.out.print("Digite o ID do veículo: ");
+                if (entrada.hasNextInt()) {
+                    idFuncionario = entrada.nextInt();
+                    break; // sai do loop se a entry for válida
+                } else {
+                    System.out.println("Entrada inválida. Por favor, digite um número.");
+                    entrada.nextLine(); // consome a entrada inválida
+                }
+            }
 
             Funcionario f = buscarFuncionario(idFuncionario);
             if (f != null) {
@@ -91,10 +104,11 @@ public class ControleFuncionario {
         }
     }
 
-    // ATUALIZAR FUNCIONÁRIO
+    // ATUALIZAR FUNCIONÁRIO: Exibo um menu com os atributos e pergunto qual deseja atualizar, no final seto a nova informação no atributo do objeto
     public void atualizarFuncionario() {
 
         int idFuncionario;
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ID do funcionário: ");
             if (entrada.hasNextInt()) {
@@ -119,6 +133,7 @@ public class ControleFuncionario {
             System.out.println("------------------------------------------------------");
 
             int opcao;
+            //Tratativa de erro
             while (true) {
                 System.out.print("Digite o número de uma das opções: ");
                 if (entrada.hasNextInt()) {
@@ -160,6 +175,7 @@ public class ControleFuncionario {
                     break;
                 case 6:
                     System.out.println("Salário atual: " + f.getSalario());
+                    //Tratativa de erro
                     while (true) {
                         System.out.print("Digite o novo salário: ");
                         if (entrada.hasNextInt() || entrada.hasNextDouble()) {
@@ -188,9 +204,10 @@ public class ControleFuncionario {
         }
     }
 
-    // DELETAR FUNCIONÁRIO
+    // DELETAR FUNCIONÁRIO: Busco o funcionário e depois o removo da lista pelo index
     public void deletarFuncionario() {
         int idFuncionario;
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ID do funcionário que deseja deletar: ");
             if (entrada.hasNextInt()) {
@@ -217,8 +234,7 @@ public class ControleFuncionario {
         }
     }
 
-    // MÉTODOS AUXILIARES
-    // Buscando funcionario pelo id de forma estatica, otimizando a velocidade de busca.
+    // BUSCAR FUNCIONÁRIO: Busco o funcionário na lista e retorno ele mesmo.
     public static Funcionario buscarFuncionario(int idFuncionario) {
         for (Funcionario f : listaFuncionarios) {
             if (f.getIdFuncionario() == idFuncionario) {
@@ -227,6 +243,9 @@ public class ControleFuncionario {
         }
         return null;
     }
+
+    // MÉTODOS AUXILIARES: Como estarei usando eles apenas nessa classe, deixo como private.
+
     //Buscando funcionario pelo index por meio do id, não estatico.
     private int buscarIndexFuncionario(int idFuncionario) {
         for (int i = 0; i < listaFuncionarios.size(); i++) {

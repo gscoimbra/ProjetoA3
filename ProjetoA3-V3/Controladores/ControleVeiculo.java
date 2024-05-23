@@ -14,7 +14,7 @@ public class ControleVeiculo {
         this.listaVeiculos = listaVeiculos;
     }
 
-    // CADASTRO DO VEÍCULO
+    // CADASTRO DO VEÍCULO: Basicamente peço ao usuário os atributos do VEÍCULO e crio um objeto veículo com as informações, depois adiciono à lista
     public void cadastrarVeiculo() {
         entrada.nextLine(); // Limpar buffer
         System.out.print("Digite a marca do veículo: ");
@@ -24,6 +24,7 @@ public class ControleVeiculo {
         String modelo = entrada.nextLine();
 
         int ano;
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ano do veículo: ");
             if (entrada.hasNextInt()) {
@@ -40,6 +41,7 @@ public class ControleVeiculo {
         String cor = entrada.nextLine();
 
         double valor;
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o valor do veículo: ");
             if (entrada.hasNextInt() || entrada.hasNextDouble()) {
@@ -57,7 +59,7 @@ public class ControleVeiculo {
         System.out.println("Veículo cadastrado com sucesso!");
     }
 
-    // EXIBIR 3 ATRIBUTOS DE TODOS OS VEÍCULOS OU TODOS DE UM VEÍCULO ESPECÍFICO
+    //EXIBIR VEÍCULOS: Exibo 3 atributos dos veículos e/ou todos de um veículo específico
     public void exibirVeiculos() {
         if (listaVeiculos.isEmpty()) {
             System.out.println("Nenhum veículo cadastrado.");
@@ -72,6 +74,7 @@ public class ControleVeiculo {
         if (resposta.equalsIgnoreCase("S")) {
 
             int idVeiculo;
+            //Tratativa de erro
             while (true) {
                 System.out.print("Digite o ID do veículo: ");
                 if (entrada.hasNextInt()) {
@@ -94,10 +97,11 @@ public class ControleVeiculo {
         }
     }
 
-    // ATUALIZAR VEÍCULO
+    // ATUALIZAR VEÍCULO: Exibo um menu com os atributos e pergunto qual deseja atualizar, no final seto a nova informação no atributo do objeto
     public void atualizarVeiculo() {
 
         int idVeiculo;
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ID do veículo: ");
             if (entrada.hasNextInt()) {
@@ -105,7 +109,7 @@ public class ControleVeiculo {
                 break; // sai do loop se a entry for válida
             } else {
                 System.out.println("Entrada inválida. Por favor, digite um número.");
-                entrada.next(); // consome a entrada inválida
+                entrada.nextLine(); // consome a entrada inválida
             }
         }
 
@@ -121,6 +125,7 @@ public class ControleVeiculo {
             System.out.println("------------------------------------------------------");
 
             int opcao;
+            //Tratativa de erro
             while (true) {
                 System.out.print("Digite o número de uma das opções: ");
                 if (entrada.hasNextInt()) {
@@ -146,6 +151,7 @@ public class ControleVeiculo {
                     break;
                 case 3:
                     System.out.println("Ano atual: " + v.getAno());;
+                    //Tratativa de erro
                     while (true) {
                         System.out.print("Digite o novo ano: ");;
                         if (entrada.hasNextInt()) {
@@ -165,6 +171,7 @@ public class ControleVeiculo {
                     break;
                 case 5:
                     System.out.println("Valor atual: " + v.getValor());
+                    //Tratativa de erro
                     while (true) {
                         System.out.print("Digite o novo valor: ");
                         if (entrada.hasNextInt() || entrada.hasNextDouble()) {
@@ -182,21 +189,16 @@ public class ControleVeiculo {
                     return;
             }
             System.out.println("Veículo atualizado com sucesso!");
-
-            System.out.print("Deseja realizar mais alguma atualização?[S/N]: ");
-            String resposta = entrada.next();
-            if (resposta.equalsIgnoreCase("S")) {
-                atualizarVeiculo();
-            }
         } else {
             System.out.println("Veículo não encontrado!");
         }
     }
 
-    // DELETAR VEÍCULO
+    // DELETAR VEÍCULO: Busco veículo e depois o removo da lista pelo index
     public void deletarVeiculo() {
 
         int idVeiculo;
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ID do veículo que deseja deletar: ");
             if (entrada.hasNextInt()) {
@@ -204,7 +206,7 @@ public class ControleVeiculo {
                 break; // sai do loop se a entry for válida
             } else {
                 System.out.println("Entrada inválida. Por favor, digite um número.");
-                entrada.next(); // consome a entrada inválida
+                entrada.nextLine(); // consome a entrada inválida
             }
         }
 
@@ -223,8 +225,8 @@ public class ControleVeiculo {
         }
     }
 
-    // MÉTODOS AUXILIARES
-    // Buscando veiculo pelo id  de forma estatica, otimizando a velocidade de busca.
+
+    // BUSCAR VEÍCULO: Busco o veículo na lista e retorno ele mesmo.
     public static Veiculo buscarVeiculo(int idVeiculo) {
         for (Veiculo v : listaVeiculos) {
             if (v.getIdVeiculo() == idVeiculo) {
@@ -233,6 +235,9 @@ public class ControleVeiculo {
         }
         return null;
     }
+
+    // MÉTODOS AUXILIARES: Como estarei usando eles apenas nessa classe, deixo como private.
+
     //Buscando veiculo pelo index por meio do id, não estatico.
     private int buscarIndexVeiculo(int idVeiculo) {
         for (int i = 0; i < listaVeiculos.size(); i++) {

@@ -9,6 +9,11 @@ import Entidades.Veiculo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+A classe Menu é responsável por apresentar o menu de opções ao usuário, permitindo que ele interaja com o sistema
+de forma intuitiva e saiba quais operações estão disponíveis. Além disso, instanciamos os objetos das classes Controle
+que possuem os métodos de suas respectivas entidades.
+*/
 public class Menu {
 
     private Scanner entrada;
@@ -17,8 +22,11 @@ public class Menu {
     private ControleVeiculo controleVeiculo;
     private ControleVenda controleVenda;
 
+    // Passo como parâmetro os ArrayLists(instanciados na main) que serão passados para seus respectivos Controles
     public Menu(Scanner entrada, ArrayList<Cliente> listaClientes, ArrayList<Funcionario> listaFuncionarios, ArrayList<Veiculo> listaVeiculos) {
         this.entrada = entrada;
+
+        // Preciso criar esses objetos controle para poder acessar seus métodos
         this.controleCliente = new ControleCliente(listaClientes, entrada);
         this.controleVeiculo = new ControleVeiculo(listaVeiculos, entrada);
         this.controleFuncionario = new ControleFuncionario(listaFuncionarios, entrada);
@@ -26,6 +34,7 @@ public class Menu {
     }
     //Função que chama a tela de MENU para o usuário
     public void exibirMenu() {
+        //Só quero que o menu seja encerrado quando o usuário digitar a opção 14 - Sair(Return; para encerrar sem erros), por isso o while(true).
         while(true) {
             System.out.println("------------------------------------------------------");
             System.out.println("--------------- Concessionária UNIFACS ---------------");
@@ -47,7 +56,7 @@ public class Menu {
             System.out.println("Opção 14 - Sair                     |");
             System.out.println("------------------------------------------------------");
 
-            //Tratativa de erro no Menu
+            //Tratativa de erro
             int opcao;
             while (true) {
                 System.out.print("Digite o número de uma das opções: ");

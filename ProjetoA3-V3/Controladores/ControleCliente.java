@@ -13,14 +13,14 @@ import java.util.Scanner;
         this.listaClientes = listaClientes;
     }
 
-    // CADASTRO DO CLIENTE
+    // CADASTRO DO CLIENTE: Basicamente peço ao usuário os atributos do cliente e crio um objeto cliente com as informações, depois adiciono à lista
     public void cadastrarCliente() {
         entrada.nextLine(); // Limpar buffer
         System.out.print("Nome do cliente: ");
         String nome = entrada.nextLine();
 
         int idade;
-
+        //Tratativa de erro
         while (true) {
             System.out.print("Idade do cliente: ");
             if (entrada.hasNextInt()) {
@@ -43,6 +43,7 @@ import java.util.Scanner;
         String endereco = entrada.nextLine();
 
         double carteira;
+        //Tratativa de erro
         while (true) {
             System.out.print("Carteira do cliente (R$): ");
             if (entrada.hasNextDouble() || entrada.hasNextInt()) {
@@ -66,7 +67,7 @@ import java.util.Scanner;
         System.out.println(cliente.getNome() + " foi cadastrado com sucesso!");
     }
 
-    //EXIBIR CLIENTES
+    //EXIBIR CLIENTES: Exibo 3 atributos dos clientes e/ou todos de um cliente específico
     public void exibirClientes() {
         if (listaClientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
@@ -81,7 +82,7 @@ import java.util.Scanner;
         if (resposta.equalsIgnoreCase("S")) {
 
             int idCliente;
-
+            //Tratativa de erro
             while (true) {
                 System.out.print("Digite o ID do cliente: ");
                 if (entrada.hasNextInt()) {
@@ -89,7 +90,7 @@ import java.util.Scanner;
                     break; // sai do loop se a entrada for válida
                 } else {
                     System.out.println("Entrada inválida. Por favor, digite um número.");
-                    entrada.next(); // consome a entrada inválida
+                    entrada.nextLine(); // consome a entrada inválida
                 }
             }
 
@@ -104,11 +105,11 @@ import java.util.Scanner;
         }
     }
 
-    // ATUALIZAR CLIENTE
+    // ATUALIZAR CLIENTE: Exibo um menu com os atributos e pergunto qual deseja atualizar, no final seto a nova informação no atributo do objeto
     public void atualizarCliente() {
 
         int idCliente;
-
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ID do cliente: ");
             if (entrada.hasNextInt()) {
@@ -116,7 +117,7 @@ import java.util.Scanner;
                 break; // sai do loop se a entrada for válida
             } else {
                 System.out.println("Entrada inválida. Por favor, digite um número.");
-                entrada.next(); // consome a entrada inválida
+                entrada.nextLine(); // consome a entrada inválida
             }
         }
 
@@ -162,7 +163,7 @@ import java.util.Scanner;
                             break; // sai do loop se a entrada for válida
                         } else {
                             System.out.println("Entrada inválida. Por favor, digite um número.");
-                            entrada.next(); // consome a entrada inválida
+                            entrada.nextLine(); // consome a entrada inválida
                         }
                     }
                     entrada.nextLine(); // Limpar buffer
@@ -192,7 +193,7 @@ import java.util.Scanner;
                             break; // sai do loop se a entrada for válida
                         } else {
                             System.out.println("Entrada inválida. Por favor, digite um número.");
-                            entrada.next(); // consome a entrada inválida
+                            entrada.nextLine(); // consome a entrada inválida
                         }
                     }
                     entrada.nextLine(); // Limpar buffer
@@ -217,10 +218,11 @@ import java.util.Scanner;
         }
     }
 
+    // DELETAR CLIENTE: Busco o cliente e depois o removo da lista pelo index
     public void deletarCliente() {
 
         int idCliente;
-
+        //Tratativa de erro
         while (true) {
             System.out.print("Digite o ID do cliente: ");
             if (entrada.hasNextInt()) {
@@ -246,8 +248,7 @@ import java.util.Scanner;
         }
     }
 
-    // MÉTODOS AUXILIARES
-    // Buscando cliente pelo id  de forma estatica, otimizando a velocidade de busca.
+    // BUSCAR CLIENTE: Busco o cliente na lista e retorno ele mesmo.
     public static Cliente buscarCliente(int idCliente) {
         for (Cliente c : listaClientes) {
             if (c.getIdCliente() == idCliente) {
@@ -256,6 +257,8 @@ import java.util.Scanner;
         }
         return null;
     }
+
+    // MÉTODOS AUXILIARES: Como estarei usando eles apenas nessa classe, deixo como private.
 
     //Buscando cliente pelo index por meio do id, não estatico.
     private int buscarIndexCliente(int idCliente) {
@@ -273,7 +276,6 @@ import java.util.Scanner;
         for (Cliente c : listaClientes) {
             System.out.format("%-8s %-20s %-8s",c.getIdCliente(),c.getNome(),c.getCarteira());
             System.out.println();
-
         }
     }
     //Exibindo em formato tabular todos atributos de um cliente.
